@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Build') { 
             steps { 
-                sh 'docker build -t mpmanthan/dev:latest .' 
+                sh 'docker build -t dev:latest .' 
             }
         }
         stage('push'){
