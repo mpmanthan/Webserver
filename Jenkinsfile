@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Build') { 
             steps { 
-                sh 'docker build -t dev:latest .' 
+                sh 'docker build -t ops:latest .' 
             }
         }
         stage('push'){
@@ -12,8 +12,8 @@ pipeline {
                 script { 
                     def dockerCredentialsId ="Dockerhub"  
                     docker.withRegistry('', dockerCredentialsId) { 
-                sh 'docker tag dev mpmanthan/dev:latest'
-                sh 'docker image push mpmanthan/dev:latest'
+                sh 'docker tag ops mpmanthan/ops:latest'
+                sh 'docker image push mpmanthan/ops:latest'
 
                     }
                  
@@ -22,7 +22,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                sh 'docker run -d -p 85:85 --name devops dev:latest' 
+                sh 'docker run -d -p 80:85 --name test ops:latest' 
             }
         }
     
